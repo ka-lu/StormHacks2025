@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components/maze.dart';
+import 'screens/maze_screen.dart';
 
 void main() {
   runApp(const MyApp());
