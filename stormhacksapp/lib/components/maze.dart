@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Maze extends StatelessWidget {
+class Maze extends StatefulWidget {
+  @override
+  _mazeState createState() => _mazeState();
+}
+
+class _mazeState extends State<Maze> {
   @override
   Widget build(BuildContext context) {
-    return Text("Hello, this is a test!");
+    return Scaffold(
+      body: Center(
+        child: Text("Hello, this is a test"),
+        ),
+    );
   }
 }
