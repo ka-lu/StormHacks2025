@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:stormhacksapp/screens/home_screen.dart';
+import 'home_screen.dart';
 
 class Maze extends StatefulWidget {
   const Maze({super.key});
@@ -10,126 +14,152 @@ class Maze extends StatefulWidget {
 }
 
 class _mazeState extends State<Maze> {
+  static const double mazeSize = 300.0;
+  static const double ballDiameter = 20.0;
+  static const double minX = 0.0;
+  static const double maxX = mazeSize - ballDiameter;
+  static const double minY = 0.0;
+  static const double maxY = mazeSize - ballDiameter;
+
+  double resetX = 150;
+  double resetY = 0;
+
   double circleX = 150;
-  double circleY = 150;
-  double speed = 1.5;
+  double circleY = 0;
+
+  double gravity = 2.0;
+  double horizontalSpeed = 5.0;
+
+  List<Rect> platforms = [];
 
   @override
   void initState() {
     super.initState();
-    accelerometerEventStream().listen((AccelerometerEvent event) {
-      setState(() {
-        circleX += event.x * speed * -1;
 
-        circleX = circleX.clamp(10, 290);
-        circleY = circleY.clamp(10, 290);
+    platforms = [
+      Rect.fromLTWH(125, 75, 100, 20),
+      Rect.fromLTWH(25, 130, 90, 20),
+      Rect.fromLTWH(155, 160, 120, 20),
+      Rect.fromLTWH(70, 220, 60, 20),
+    ];
+
+    Timer.periodic(const Duration(milliseconds: 16), (timer) {
+      setState(() {
+        applyGravity();
+        clampBoundaries();
       });
     });
   }
 
+  void clampBoundaries() {
+    if ((circleX > 125 && circleX < 165) && (circleY > 275)) {
+      Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ChatScreen()
+        ),
+    );
+    }
+    if (circleY > maxY) {
+      circleX = resetX;
+      circleY = resetY;
+      return;
+    }
+    circleX = circleX.clamp(minX, maxX);
+    circleY = circleY.clamp(minY, maxY);
+  }
+
+  void applyGravity() {
+    double nextY = circleY + gravity;
+
+    bool onPlatform = false;
+    for (Rect p in platforms) {
+      if (circleX + 20 > p.left && circleX < p.right) {
+        if (circleY + 20 <= p.top && nextY + 20 >= p.top) {
+          nextY = p.top - 20;
+          onPlatform = true;
+        }
+      }
+    }
+    if (!onPlatform) {
+      circleY = nextY;
+    }
+  }
+
+  KeyEventResult handleKey(FocusNode node, KeyEvent event) {
+    if (event is KeyDownEvent || event is KeyRepeatEvent) {
+      if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+        circleX -= horizontalSpeed;
+        setState(() {});
+      }
+      else if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
+        circleX += horizontalSpeed;
+        setState(() {});
+      }
+    }
+    return KeyEventResult.handled;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: 
-        Stack(
-          children: [
+    return Focus(
+      autofocus: true, // <-- Ensures it receives keyboard events immediately
+      onKeyEvent: handleKey,
+      child: Scaffold(
+        body: Center(
+          child: Stack(
+            children: [
 
-            // blue box
-            Container(
-              width: 300,
-              height: 300,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20), // For a rounded rectangle
-              ),
-            ),
-
-            // obstacle
-            Positioned(
-              left: 125,
-              top: 75,
-              child: Container (
-                width: 100,
-                height: 20,
+              Container(
+                width: 300,
+                height: 300,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 16, 70, 133),
-                  borderRadius: BorderRadius.circular(10), 
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
-            ),
 
-            // obstacle
-            Positioned(
-              left: 25,
-              top: 130,
-              child: Container (
-                width: 90,
-                height: 20,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 16, 70, 133),
-                  borderRadius: BorderRadius.circular(10), 
+              ...platforms.map((p) => Positioned(
+                left: p.left,
+                top: p.top,
+                child: Container(
+                  width: p.width,
+                  height: p.height,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 16, 70, 133),
+                    //borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              )),
+
+              Positioned(
+                left: circleX,
+                top: circleY,
+                child: Container(
+                  width: 20,
+                  height: 20,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
-            ),
 
-            // obstacle
-            Positioned(
-              left: 155,
-              top: 160,
-              child: Container (
-                width: 120,
-                height: 20,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 16, 70, 133),
-                  borderRadius: BorderRadius.circular(10), 
+              Positioned(
+                left: 125,
+                top: 275,
+                child: Container(
+                  width: 40,
+                  height: 25,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
-            ),
 
-            // obstacle
-            Positioned(
-              left: 70,
-              top: 220,
-              child: Container (
-                width: 60,
-                height: 20,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 16, 70, 133),
-                  borderRadius: BorderRadius.circular(10), 
-                ),
-              ),
-            ),
-
-            // white ball
-            Positioned(
-              left: circleX - 10,
-              top: circleY - 140,
-              child: Container (
-                width: 20,
-                height: 20,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
-
-            // black hole
-            Positioned(
-              left: 125,
-              top: 275,
-              child: Container (
-                width: 40,
-                height: 25,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 0, 0, 0),
-                  borderRadius: BorderRadius.circular(10), 
-                ),
-              ),
-            ),
-
-          ],
+            ],
+          ),
         ),
       ),
     );
