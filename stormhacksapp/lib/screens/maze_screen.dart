@@ -53,9 +53,10 @@ class _mazeState extends State<Maze> {
     _accelerometerSubscription = accelerometerEventStream().listen((AccelerometerEvent event) {
       if (mounted) {
         setState(() {
-          double newX = circleX + event.x * _tiltSensitivity;
+          double deltaX =  event.x * _tiltSensitivity;
+          double newX = circleX + deltaX;
           if (!checkCollision(newX, circleY)) {
-            circleX += newX;
+            circleX = newX;
           }
         });
       }
