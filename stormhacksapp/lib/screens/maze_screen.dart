@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import 'dart:async';
 
 class Maze extends StatefulWidget {
   const Maze({super.key});
@@ -20,8 +21,8 @@ class _mazeState extends State<Maze> {
       setState(() {
         circleX += event.x * speed * -1;
 
-        circleX = circleX.clamp(10, 490);
-        circleY = circleY.clamp(10, 490);
+        circleX = circleX.clamp(10, 290);
+        circleY = circleY.clamp(10, 290);
       });
     });
   }
@@ -102,8 +103,8 @@ class _mazeState extends State<Maze> {
 
             // white ball
             Positioned(
-              left: circleX - 110,
-              top: circleY - 240,
+              left: circleX - 10,
+              top: circleY - 140,
               child: Container (
                 width: 20,
                 height: 20,
