@@ -7,8 +7,8 @@ class Maze extends StatefulWidget {
 }
 
 class _mazeState extends State<Maze> {
-  double circleX = 250;
-  double circleY = 250;
+  double circleX = 150;
+  double circleY = 150;
   double speed = 1.5;
 
   @override
@@ -43,14 +43,27 @@ class _mazeState extends State<Maze> {
             ),
 
             Positioned(
-              left: (300-20) / 2,
-              top: (300-20) / 2,
+              left: circleX - 110,
+              top: circleY - 110,
               child: Container (
                 width: 20,
                 height: 20,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
+                ),
+              ),
+            ),
+
+            Positioned(
+              left: 60,
+              top: (0),
+              child: Container (
+                width: 40,
+                height: 25,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                  borderRadius: BorderRadius.circular(20), 
                 ),
               ),
             ),
