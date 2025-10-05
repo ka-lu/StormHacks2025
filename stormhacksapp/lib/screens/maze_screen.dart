@@ -11,10 +11,13 @@ class Maze extends StatefulWidget {
   _mazeState createState() => _mazeState();
 }
 
-class _mazeState extends State<Maze> with SingleTickerProviderStateMixin{
+class _mazeState extends State<Maze> {
   
   static const double board = 300; // the size of the game
-  
+  static const double r = 10; //radius of ball
+  double vy = 120;
+  Timer? _timer; 
+
   
   double circleX = 150;
   double circleY = 150;
@@ -23,6 +26,32 @@ class _mazeState extends State<Maze> with SingleTickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
+    const tick = Duration(milliseconds: 16);
+    _timer = Timer.periodic(tick, (_) {
+      const dt = 16/1000.0; //sec per tick
+      setState(() {
+        //circleY = circleY - 20;
+        circleY = circleY + (vy*dt);
+
+        // if (circleY > board -r){
+        //   circleY = r;
+        // }
+        if (circleY + 10 >= board ) {
+          circleY = r;
+        }
+        else{
+          circleX = circleX.clamp(10, 300 -10);
+        }
+      });
+      });
+      
+      @override
+      void dispose(){
+        _timer?.cancel();
+        super.dispose();
+      }
+
+
     accelerometerEventStream().listen((AccelerometerEvent event) {
       setState(() {
         circleX += event.x * speed * -1;
@@ -110,7 +139,7 @@ class _mazeState extends State<Maze> with SingleTickerProviderStateMixin{
             // white ball
             Positioned(
               left: circleX - 10,
-              top: circleY - 140,
+              top: circleY - r,
               child: Container (
                 width: 20,
                 height: 20,
