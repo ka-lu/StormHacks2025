@@ -1,8 +1,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-
+//import 'package:url_launcher/url_launcher.dart';
+import 'maze_screen.dart';
 
 class SimpleChatInput extends StatefulWidget {
   const SimpleChatInput({super.key});
@@ -19,6 +19,16 @@ class _SimpleChatInputState extends State<SimpleChatInput> {
   void _handleSend() async {
   final message = _textController.text;
   if (message.isNotEmpty) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Maze()
+        ),
+    );
+
+
+    // sms logic
+    /*
     final String encodedMessage = Uri.encodeComponent(message).replaceAll('+', '%20');
     final String smsUrl = 'sms:${widget._phoneNumber}?body=$encodedMessage';
 
@@ -33,7 +43,9 @@ class _SimpleChatInputState extends State<SimpleChatInput> {
 
     // Clear the text field
     _textController.clear();
+    */
 
+    _textController.clear();
     // Dismiss keyboard
     FocusScope.of(context).unfocus();
   }
