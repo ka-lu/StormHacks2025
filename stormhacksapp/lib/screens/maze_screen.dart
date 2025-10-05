@@ -211,6 +211,11 @@ class _mazeState extends State<Maze> {
                         color: const Color.fromARGB(255, 0, 0, 0),
                         borderRadius: BorderRadius.circular(10),
                       ),
+                          child: Icon(
+                            Icons.send,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                     ),
                   ),
                 ],
@@ -248,3 +253,4 @@ void _sendSMS() async {
     }
   }
 }
+
