@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import 'dart:async';
+import 'package:flutter/scheduler.dart';
+
 
 class Maze extends StatefulWidget {
   const Maze({super.key});
@@ -8,7 +11,11 @@ class Maze extends StatefulWidget {
   _mazeState createState() => _mazeState();
 }
 
-class _mazeState extends State<Maze> {
+class _mazeState extends State<Maze> with SingleTickerProviderStateMixin{
+  
+  static const double board = 300; // the size of the game
+  
+  
   double circleX = 150;
   double circleY = 150;
   double speed = 1.5;
@@ -19,7 +26,7 @@ class _mazeState extends State<Maze> {
     accelerometerEventStream().listen((AccelerometerEvent event) {
       setState(() {
         circleX += event.x * speed * -1;
-
+        circleY += event.y * speed;
         circleX = circleX.clamp(10, 490);
         circleY = circleY.clamp(10, 490);
       });
@@ -102,8 +109,8 @@ class _mazeState extends State<Maze> {
 
             // white ball
             Positioned(
-              left: circleX - 110,
-              top: circleY - 240,
+              left: circleX - 10,
+              top: circleY - 140,
               child: Container (
                 width: 20,
                 height: 20,
