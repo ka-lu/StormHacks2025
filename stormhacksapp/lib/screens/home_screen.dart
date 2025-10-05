@@ -116,7 +116,7 @@ class ChatScreen extends StatelessWidget {
               children: <Widget>[
 
                 Text(
-                  'Simple-Ton',
+                  'Fastenger',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: const Color.fromARGB(255, 0, 0, 0),
