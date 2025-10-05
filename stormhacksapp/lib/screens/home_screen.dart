@@ -21,15 +21,14 @@ class _SimpleChatInputState extends State<SimpleChatInput> {
 
     globalMessage = message;
 
+
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => Maze()
         ),
     );
-
     _textController.clear();
-    // Dismiss keyboard
     FocusScope.of(context).unfocus();
   }
 }
@@ -102,32 +101,37 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // 1. The AppBar at the top of the screen
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Chat Demo',
-          textAlign: TextAlign.center,
-          style: TextStyle(
+    return GestureDetector(
+      onTap: () {
+        // This hides the keyboard when tapping anywhere outside the TextField
+        FocusScope.of(context).unfocus();
+      },
+      behavior: HitTestBehavior.translucent, // ensures taps on empty space are detected
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'Chat Demo',
+            textAlign: TextAlign.center,
+            style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
-      
-      // 2. The main body of the screen (where messages would appear)
-      body: Center(
-        child: Column(
-          children: const <Widget>[
-            Expanded(
-              child: Text('You smell'),
-            ),
-          ],
+        
+        body: Center(
+          child: Column(
+            children: const <Widget>[
+              Expanded(
+                child: Text('You smell'),
+              ),
+            ],
+          ),
         ),
-      ),
 
-      bottomNavigationBar: const SimpleChatInput(),
+        bottomNavigationBar: const SimpleChatInput(),
+      ),
     );
   }
 }
