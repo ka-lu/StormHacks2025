@@ -64,10 +64,10 @@ class _mazeState extends State<Maze> {
       _sendSMS();
       Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-        builder: (context) => ChatScreen()
-        ),
-    );
+        MaterialPageRoute(
+          builder: (context) => ChatScreen()
+          ), 
+      );
     }
     if (circleY > maxY) {
       circleX = resetX;
