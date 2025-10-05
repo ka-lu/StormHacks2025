@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
 class Maze extends StatefulWidget {
+  const Maze({super.key});
+
   @override
   _mazeState createState() => _mazeState();
 }
