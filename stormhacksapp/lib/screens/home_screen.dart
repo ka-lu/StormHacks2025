@@ -79,7 +79,7 @@ class _SimpleChatInputState extends State<SimpleChatInput> {
             Padding(
               padding: const EdgeInsets.only(bottom: 4.0), // A small bottom padding for alignment
               child: IconButton(
-                icon: const Icon(Icons.send, color: Colors.blue),
+                icon: const Icon(Icons.send, color: Color.fromRGBO(33, 150, 243, 1)),
                 onPressed: _handleMaze,
                 iconSize: 32.0,
               ),
