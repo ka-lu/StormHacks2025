@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Maze extends StatefulWidget {
+  const Maze({super.key});
+
   @override
   _mazeState createState() => _mazeState();
 }
