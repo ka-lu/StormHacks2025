@@ -17,7 +17,6 @@ class _mazeState extends State<Maze> {
     accelerometerEventStream().listen((AccelerometerEvent event) {
       setState(() {
         circleX += event.x * speed * -1;
-        circleY += event.y * speed;
 
         circleX = circleX.clamp(10, 490);
         circleY = circleY.clamp(10, 490);
@@ -33,6 +32,7 @@ class _mazeState extends State<Maze> {
         Stack(
           children: [
 
+            // blue box
             Container(
               width: 300,
               height: 300,
@@ -42,9 +42,66 @@ class _mazeState extends State<Maze> {
               ),
             ),
 
+            // obstacle
+            Positioned(
+              left: 125,
+              top: 75,
+              child: Container (
+                width: 100,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 16, 70, 133),
+                  borderRadius: BorderRadius.circular(10), 
+                ),
+              ),
+            ),
+
+            // obstacle
+            Positioned(
+              left: 25,
+              top: 130,
+              child: Container (
+                width: 90,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 16, 70, 133),
+                  borderRadius: BorderRadius.circular(10), 
+                ),
+              ),
+            ),
+
+            // obstacle
+            Positioned(
+              left: 155,
+              top: 160,
+              child: Container (
+                width: 120,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 16, 70, 133),
+                  borderRadius: BorderRadius.circular(10), 
+                ),
+              ),
+            ),
+
+            // obstacle
+            Positioned(
+              left: 70,
+              top: 220,
+              child: Container (
+                width: 60,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 16, 70, 133),
+                  borderRadius: BorderRadius.circular(10), 
+                ),
+              ),
+            ),
+
+            // white ball
             Positioned(
               left: circleX - 110,
-              top: circleY - 110,
+              top: circleY - 240,
               child: Container (
                 width: 20,
                 height: 20,
@@ -55,15 +112,16 @@ class _mazeState extends State<Maze> {
               ),
             ),
 
+            // black hole
             Positioned(
-              left: 60,
-              top: (0),
+              left: 125,
+              top: 275,
               child: Container (
                 width: 40,
                 height: 25,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 0, 0, 0),
-                  borderRadius: BorderRadius.circular(20), 
+                  borderRadius: BorderRadius.circular(10), 
                 ),
               ),
             ),
