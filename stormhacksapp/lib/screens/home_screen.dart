@@ -1,13 +1,12 @@
 
 
 import 'package:flutter/material.dart';
-//import 'package:url_launcher/url_launcher.dart';
 import 'maze_screen.dart';
 
+
+String globalMessage = '';
 class SimpleChatInput extends StatefulWidget {
   const SimpleChatInput({super.key});
-
-  final String _phoneNumber = '+17783253856';
 
   @override
   _SimpleChatInputState createState() => _SimpleChatInputState();
@@ -16,34 +15,18 @@ class SimpleChatInput extends StatefulWidget {
 class _SimpleChatInputState extends State<SimpleChatInput> {
   final TextEditingController _textController = TextEditingController();
 
-  void _handleSend() async {
+  void _handleMaze() {
   final message = _textController.text;
   if (message.isNotEmpty) {
+
+    globalMessage = message;
+
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => Maze()
         ),
     );
-
-
-    // sms logic
-    /*
-    final String encodedMessage = Uri.encodeComponent(message).replaceAll('+', '%20');
-    final String smsUrl = 'sms:${widget._phoneNumber}?body=$encodedMessage';
-
-    final Uri smsUri = Uri.parse(smsUrl);
-
-
-    if (await canLaunchUrl(smsUri)) {
-      await launchUrl(smsUri);
-    } else {
-      print('Could not launch SMS app');
-    }
-
-    // Clear the text field
-    _textController.clear();
-    */
 
     _textController.clear();
     // Dismiss keyboard
@@ -97,7 +80,7 @@ class _SimpleChatInputState extends State<SimpleChatInput> {
               padding: const EdgeInsets.only(bottom: 4.0), // A small bottom padding for alignment
               child: IconButton(
                 icon: const Icon(Icons.send, color: Colors.blue),
-                onPressed: _handleSend,
+                onPressed: _handleMaze,
                 iconSize: 32.0,
               ),
             ),

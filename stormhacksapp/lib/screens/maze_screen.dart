@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import 'package:stormhacksapp/screens/home_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Maze extends StatefulWidget {
+  static String typedMessage = '';
+
   const Maze({super.key});
 
   @override
@@ -132,5 +136,39 @@ class _mazeState extends State<Maze> {
         ),
       ),
     );
+  }
+
+
+void _sendSMS() async {
+  final phoneNumber = '+17783253856'; // replace with your number
+  final encodedMessage = Uri.encodeComponent(globalMessage).replaceAll('+', '%20');
+  final Uri smsUri = Uri.parse('sms:$phoneNumber?body=$encodedMessage');
+
+  if (await canLaunchUrl(smsUri)) {
+    await launchUrl(smsUri);
+  } else {
+    print('Could not launch SMS app');
+  }
+}
+
+  // checking if ball goes into goal
+  bool isGoal() {
+
+    // ball positions
+    final ballLeft = circleX - 110;
+    final ballRight = ballLeft + 20;
+    final ballBot = circleY - 240;
+    final ballTop = ballBot + 20;
+
+    // goal positions
+    final goalTop = 275;
+    final goalLeft = 125;
+    final goalRight = goalLeft + 40;
+    final goalBot = goalTop + 25;
+
+    return ballRight > goalLeft &&
+        ballLeft < goalRight &&
+        ballBot > goalTop &&
+        ballTop < goalBot;
   }
 }
