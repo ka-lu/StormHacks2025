@@ -118,7 +118,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 child: Container(
                   height: 30,
                   decoration: BoxDecoration(
-                    border: Border.all(color: const Color.fromARGB(255, 255, 255, 255), width: 2),
+                    border: Border.all(color: const Color.fromARGB(255, 218, 169, 10), width: 2),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: ClipRRect(

@@ -45,9 +45,9 @@ class _mazeState extends State<Maze> {
 
     platforms = [
       Rect.fromLTWH(125, 75, 100, 20),
-      Rect.fromLTWH(25, 130, 90, 20),
-      Rect.fromLTWH(155, 160, 120, 20),
-      Rect.fromLTWH(70, 220, 60, 20),
+      Rect.fromLTWH(25, 130, 110, 20),
+      Rect.fromLTWH(170, 170, 95, 20),
+      Rect.fromLTWH(70, 220, 80, 20),
     ];
 
     _accelerometerSubscription = accelerometerEventStream().listen((AccelerometerEvent event) {
