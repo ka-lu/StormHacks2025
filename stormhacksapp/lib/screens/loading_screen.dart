@@ -12,7 +12,7 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   double progress = 0.0;
   double drainSpeed = 0.005; // How fast the bar drains (adjust for difficulty)
-  double tapIncrease = 0.08; // How much each tap fills (adjust for difficulty)
+  double tapIncrease = 0.03; // How much each tap fills (adjust for difficulty)
   Timer? _drainTimer;
   bool hasWon = false;
 
