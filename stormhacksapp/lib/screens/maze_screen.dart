@@ -35,7 +35,7 @@ class _mazeState extends State<Maze> {
   List<Rect> platforms = [];
 
   StreamSubscription<AccelerometerEvent>? _accelerometerSubscription;
-  double _tiltSensitivity = 3.0;
+  final double _tiltSensitivity = 3.0;
 
   Timer? _gravityTimer;
 
@@ -158,6 +158,7 @@ class _mazeState extends State<Maze> {
       autofocus: true,
       onKeyEvent: handleKey,
       child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 207, 56, 56),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -169,7 +170,7 @@ class _mazeState extends State<Maze> {
                     width: 300,
                     height: 300,
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: const Color.fromARGB(255, 211, 138, 29),
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
@@ -181,7 +182,7 @@ class _mazeState extends State<Maze> {
                       width: p.width,
                       height: p.height,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 16, 70, 133),
+                        color: const Color.fromARGB(255, 161, 97, 0),
                       ),
                     ),
                   )),
@@ -200,7 +201,7 @@ class _mazeState extends State<Maze> {
                   ),
 
                   Positioned(
-                    left: 125,
+                    left: 129,
                     top: 275,
                     child: Container(
                       width: 40,
@@ -216,22 +217,15 @@ class _mazeState extends State<Maze> {
 
               SizedBox(height: 10),
               Text(
-                'Tilt your phone to move the ball!',
+                'SEND',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(255, 0, 0, 0),
                 ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 4),
-              Text(
-                'Reach the black hole to send',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-                ),
-                textAlign: TextAlign.center,
-              ),
 
             ],
           ),

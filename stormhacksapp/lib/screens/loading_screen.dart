@@ -83,7 +83,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return GestureDetector(
       onTap: handleTap,
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 207, 56, 56),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -92,15 +92,23 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 'Loading...',
                 style: TextStyle(
                   color: const Color.fromARGB(255, 0, 0, 0),
-                  fontSize: 32,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Bangers',
+                  shadows: [
+                      Shadow(
+                          blurRadius:10.0,  // shadow blur
+                            color: Colors.orange, // shadow color
+                            offset: Offset(0.0,2.0), // how much shadow will be shown
+                      ),
+                  ],
                 ),
               ),
               SizedBox(height: 5),
               Text(
                 'Tap to load faster!',
                 style: TextStyle(
-                  color: const Color.fromARGB(255, 44, 141, 231),
+                  color: const Color.fromARGB(255, 71, 3, 3),
                   fontSize: 18,
                 ),
               ),
@@ -110,7 +118,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 child: Container(
                   height: 30,
                   decoration: BoxDecoration(
-                    border: Border.all(color: const Color.fromARGB(255, 12, 53, 116), width: 2),
+                    border: Border.all(color: const Color.fromARGB(255, 255, 255, 255), width: 2),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: ClipRRect(
@@ -135,7 +143,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
               Text(
                 '${(progress * 100).toStringAsFixed(0)}%',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: const Color.fromARGB(255, 83, 0, 0),
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -146,9 +154,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 Text(
                   'Tap faster!',
                   style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    color: const Color.fromARGB(255, 80, 8, 2),
+                    fontSize: 17,
                   ),
                 ),
             ],
