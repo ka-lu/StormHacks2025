@@ -13,10 +13,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Chat demo' ,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: const LoadingScreen(),
       //home: const ChatScreen(),
       //home : const Maze(),
