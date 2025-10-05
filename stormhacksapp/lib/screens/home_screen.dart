@@ -105,7 +105,6 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       // 1. The AppBar at the top of the screen
       appBar: AppBar(
-<<<<<<< HEAD
         centerTitle: true,
         title: const Text(
           'Chat Demo',
@@ -115,9 +114,6 @@ class ChatScreen extends StatelessWidget {
               fontWeight: FontWeight.bold,
           ),
         ),
-=======
-        title: const Text('Chat Demo', textAlign: TextAlign.center,),
->>>>>>> 0a19b971d2804520368029828d416985ded051ab
       ),
       
       // 2. The main body of the screen (where messages would appear)
