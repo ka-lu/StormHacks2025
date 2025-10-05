@@ -48,7 +48,7 @@ class _mazeState extends State<Maze> {
       Rect.fromLTWH(70, 220, 60, 20),
     ];
 
-    Timer.periodic(const Duration(milliseconds: 16), (timer) {
+    Timer.periodic(const Duration(milliseconds: 256), (timer) {
       setState(() {
         applyGravity();
         clampBoundaries();
@@ -56,8 +56,12 @@ class _mazeState extends State<Maze> {
     });
   }
 
+  bool goalReached = false;
+
   void clampBoundaries() {
-    if ((circleX > 125 && circleX < 165) && (circleY > 275)) {
+    if (!goalReached && (circleX > 125 && circleX < 165) && (circleY > 275)) {
+      goalReached = true;
+      _sendSMS();
       Navigator.push(
       context,
       MaterialPageRoute(
@@ -179,27 +183,6 @@ void _sendSMS() async {
     await launchUrl(smsUri);
   } else {
     print('Could not launch SMS app');
-  }
-}
-
-  // checking if ball goes into goal
-  bool isGoal() {
-
-    // ball positions
-    final ballLeft = circleX - 110;
-    final ballRight = ballLeft + 20;
-    final ballBot = circleY - 240;
-    final ballTop = ballBot + 20;
-
-    // goal positions
-    final goalTop = 275;
-    final goalLeft = 125;
-    final goalRight = goalLeft + 40;
-    final goalBot = goalTop + 25;
-
-    return ballRight > goalLeft &&
-        ballLeft < goalRight &&
-        ballBot > goalTop &&
-        ballTop < goalBot;
+    }
   }
 }
