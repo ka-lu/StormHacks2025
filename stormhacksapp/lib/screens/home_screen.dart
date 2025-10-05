@@ -21,7 +21,7 @@ class _SimpleChatInputState extends State<SimpleChatInput> {
 
     globalMessage = message;
 
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => Maze()

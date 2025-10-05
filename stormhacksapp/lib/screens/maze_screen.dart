@@ -62,7 +62,7 @@ class _mazeState extends State<Maze> {
     if (!goalReached && (circleX > 125 && circleX < 165) && (circleY > 275)) {
       goalReached = true;
       _sendSMS();
-      Navigator.push(
+      Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => ChatScreen()
