@@ -60,10 +60,10 @@ class _mazeState extends State<Maze> {
     if ((circleX > 125 && circleX < 165) && (circleY > 275)) {
       Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => ChatScreen()
-        ),
-    );
+        MaterialPageRoute(
+          builder: (context) => ChatScreen()
+          ), 
+      );
     }
     if (circleY > maxY) {
       circleX = resetX;

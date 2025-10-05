@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      //home: const ChatScreen(),
-      home : const Maze(),
+      home: const ChatScreen(),
+      //home : const Maze(),
     );
   }
 }
